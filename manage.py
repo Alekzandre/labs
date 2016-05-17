@@ -3,7 +3,7 @@ import os
 from app import create_app, db
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
-from app.main.models import User, Role
+from app.auth.models import User
 
 app = create_app(os.getenv('42LABSCONF') or 'default')
 manager = Manager(app)
@@ -14,8 +14,7 @@ def make_shell_context():
     return {
         'app': app,
         'db': db,
-        'User': User,
-        'Role': Role
+        'User': User
     }
 
 manager.add_command("shell", Shell(make_context=make_shell_context))
