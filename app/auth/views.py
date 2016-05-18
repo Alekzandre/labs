@@ -10,12 +10,10 @@ from .. import db
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        print "-------------"
-        print form.data['email']
         user = User.query.filter_by(email=form.data['email']).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remenber_me.data)
-            return redirect(request.args.get('next') or url_for('main.index'))
+            return redirect(url_for('main.index'))
         flash('invalid username or password')
     return(render_template('auth/login.html', form=form))
 
@@ -24,8 +22,8 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash('You haven been logged out')
-    return redirect(url_for('main.index'))
+    # flash('You haven been logged out')
+    return(render_template('goodbye.html'))
 
 
 @auth.route('/register', methods=['GET', 'POST'])
