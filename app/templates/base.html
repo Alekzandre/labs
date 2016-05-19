@@ -25,7 +25,7 @@
                 {% if current_user.is_authenticated %}
                 <li><a href="{{url_for('main.index')}}">Home</a></li>
                 <li><a href="{{ url_for('auth.register') }}">Add new menber</a></li>
-                <li><a href="{{ url_for('firm.index') }}">Add new menber</a></li>
+                <li><a href="{{ url_for('firm.index') }}">Add new firm</a></li>
                 {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
