@@ -27,6 +27,7 @@ def logout():
 
 
 @auth.route('/register', methods=['GET', 'POST'])
+@login_required
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
