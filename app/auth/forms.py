@@ -2,7 +2,9 @@ from flask.ext.wtf import Form
 from wtforms import StringField, BooleanField, SubmitField, PasswordField
 from wtforms.validators import Required, Email, Length, EqualTo, Regexp
 from wtforms import ValidationError
-from .models import User
+from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from .models import User, Role
+from .. import db
 
 
 class LoginForm(Form):
@@ -12,6 +14,9 @@ class LoginForm(Form):
     remenber_me = BooleanField('Keep me logged in')
     submit = SubmitField('Log in')
 
+
+def get_Role():
+    return Role.query
 
 class RegistrationForm(Form):
     email = StringField('Email', validators=[Required(), Length(1, 64),
@@ -23,6 +28,7 @@ class RegistrationForm(Form):
     password = PasswordField('Password', validators=[
         Required(), EqualTo('password2', message='Passwords must match.')])
     password2 = PasswordField('Confirm password', validators=[Required()])
+    Role = QuerySelectField('Role list',query_factory=get_Role,get_label='name',allow_blank=False)
     submit = SubmitField('Register')
 
     def validate_email(self, field):
