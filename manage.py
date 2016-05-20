@@ -1,5 +1,6 @@
 #! /usr/bin/python
 import os
+from flask import redirect, url_for
 from app import create_app, db
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
@@ -9,6 +10,10 @@ from app.firm.models import Firm
 app = create_app(os.getenv('42LABSCONF') or 'default')
 manager = Manager(app)
 migrate = Migrate(app, db)
+
+@app.route('/')
+def base_url():
+    return redirect(url_for('auth.login'))
 
 
 def make_shell_context():
