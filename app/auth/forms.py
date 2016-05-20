@@ -4,6 +4,7 @@ from wtforms.validators import Required, Email, Length, EqualTo, Regexp
 from wtforms import ValidationError
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from .models import User, Role
+from ..firm.models import Firm
 from .. import db
 
 
@@ -18,6 +19,9 @@ class LoginForm(Form):
 def get_Role():
     return Role.query
 
+def get_Firm():
+	return Firm.query
+
 class RegistrationForm(Form):
     email = StringField('Email', validators=[Required(), Length(1, 64),
                                              Email()])
@@ -28,7 +32,8 @@ class RegistrationForm(Form):
     password = PasswordField('Password', validators=[
         Required(), EqualTo('password2', message='Passwords must match.')])
     password2 = PasswordField('Confirm password', validators=[Required()])
-    Role = QuerySelectField('Role list',query_factory=get_Role,get_label='name',allow_blank=False)
+    role = QuerySelectField('Role list',query_factory=get_Role,get_label='name',allow_blank=False)
+    firm = QuerySelectField('Firm list',query_factory=get_Firm,get_label='name',allow_blank=False)
     submit = SubmitField('Register')
 
     def validate_email(self, field):

@@ -2,7 +2,7 @@ from flask import render_template, session, redirect, url_for, flash, request
 from flask.ext.login import login_user, logout_user, login_required
 from .forms import LoginForm, RegistrationForm
 from . import auth
-from .models import User
+from .models import User, Role
 from .. import db
 
 
@@ -31,10 +31,15 @@ def logout():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
+    	print form.role.data.id
+        print form.firm.data.id
         user = User(email=form.email.data,
                     username=form.username.data,
-                    password=form.password.data)
+                    password=form.password.data,
+                    role_id=form.role.data.id,
+                    firm_id=form.firm.data.id
+                    )
         db.session.add(user)
         flash('You can now login.')
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('auth.register'))
     return render_template('auth/register.html', form=form)
