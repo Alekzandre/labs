@@ -6,7 +6,7 @@
 <div class="page-header">
     <h1>Hello, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Stranger{% endif %}!</h1>
 </div>
-
+{%if current_user.role.id == 1%}
 <div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
@@ -15,7 +15,7 @@
 				</div>
 				<div class="panel-body">
 					<div class="table-responsive">
-						<table class="table table-striped table-bordered table-hover" id="records-list">
+						<table class="table table-striped table-bordered table-hover" id="users-list">
 							<thead>
 								<tr>
 									<th>Username</th>
@@ -27,7 +27,8 @@
 							<tbody>
 								{% for u in user %}
 								<tr>
-									<td>{{ u.username }}</td>
+								<a  href="{{ url_for('main.user', user_id=u.id) }}" >
+									<td><a href="{{ url_for('main.user', user_id=u.id) }}" >{{u.username}}</a></td>
 									<td>{{ u.email }}</td>
 									<td>{{ u.firm.name }}</td>
 									<td>{{ u.role.name }}</td>
@@ -42,5 +43,6 @@
 		</div>
 		<!-- /.col-lg-4 -->
 	</div>
+	{% endif %}
 
 {% endblock %}

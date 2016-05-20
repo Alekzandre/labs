@@ -22,7 +22,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    # flash('You haven been logged out')
+    flash('You haven been logged out')
     return(render_template('goodbye.html'))
 
 

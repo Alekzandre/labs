@@ -22,7 +22,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                {% if current_user.is_authenticated %}
+                {% if current_user.is_authenticated and current_user.role.id < 3 %}
                 <li><a href="{{url_for('main.index')}}">Home</a></li>
                 <li><a href="{{ url_for('auth.register') }}">Add new menber</a></li>
                 <li><a href="{{ url_for('firm.index') }}">Add new firm</a></li>
