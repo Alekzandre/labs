@@ -11,6 +11,7 @@ app = create_app(os.getenv('42LABSCONF') or 'default')
 manager = Manager(app)
 migrate = Migrate(app, db)
 
+
 @app.route('/')
 def base_url():
     return redirect(url_for('auth.login'))
