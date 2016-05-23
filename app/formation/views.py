@@ -13,5 +13,5 @@ from config import Config
 def index():
     api = intra_api.IntraApi(Config.INTRA_API_CLIENT_ID,
                              Config.INTRA_API_CLIENT_SECRET)
-    api.get_token()
-    return(render_template('formation/index.html'))
+    projects = api.get_projects()
+    return(render_template('formation/index.html', projects=projects))
