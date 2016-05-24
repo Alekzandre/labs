@@ -27,7 +27,6 @@
 							<tbody>
 								{% for u in users %}
 								<tr>
-								<a  href="{{ url_for('main.user', user_id=u.id) }}" >
 									<td><a href="{{ url_for('main.user', user_id=u.id) }}" >{{u.username}}</a></td>
 									<td>{{ u.email }}</td>
 									<td>{{ u.firm.name }}</td>
