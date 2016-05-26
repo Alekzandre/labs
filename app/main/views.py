@@ -22,13 +22,14 @@ def user(user_id):
     user = User.query.get(user_id)
     return render_template('main/user.html', user=user)
 
+
 @main.route('/user/update/<int:user_id>', methods=['GET', 'POST'])
 @login_required
 def update_profile(user_id):
     user = User.query.get(user_id)
     form = UpdateUserForm()
     if form.validate_on_submit():
-        user.password=form.password.data
+        user.password = form.password.data
         print form.password.data
         db.session.commit()
         return redirect(url_for('main.user', user_id=user_id))
@@ -45,6 +46,6 @@ def upload():
         file = form.image.data
         if file:
             filename = secure_filename(file.filename)
-            file.save(os.path.join('/Users/jacob/LABS/labs/cdn', completed))
+            file.save(os.path.join('./cdn', completed))
             return redirect(url_for('main.index'))
     return render_template('main/upload.html', form=form)
