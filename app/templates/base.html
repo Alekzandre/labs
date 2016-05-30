@@ -1,48 +1,109 @@
 {% extends "bootstrap/base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
+
+{% block head %}
+{{super()}}
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/plugins/metisMenu/metisMenu.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/plugins/timeline.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/sb-admin-2.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/plugins/morris.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='font-awesome-4.1.0/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/plugins/bootstrap-editable.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/plugins/datetimepicker.css')}}">
+{% endblock %}
+
 {% block title %}Labs{% endblock %}
 
 {% block navbar %}
-<div class="navbar navbar-inverse" role="navigation">
-    <div class="container">
-        {% for msg in get_flashed_messages() %}
+<div id="wrapper">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        {% if current_user.is_authenticated %}
+        <a class="navbar-brand" href="/">42 LABS</a>
+        {% else %}
+        <a class="navbar-brand" href="{{ url_for('auth.login') }}">42 LABS</a>
+        {% endif %}
+    </div>
+    <!-- /.navbar-header -->
+
+    <ul class="nav navbar-top-links navbar-right">
+        {% if current_user.is_authenticated %}
+        <li><a href="{{ url_for('auth.logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+        {% else %}
+        <li><a href="{{ url_for('auth.login') }}"><i class="fa fa-sign-out fa-fw"></i> Login</a></li>
+        {% endif %}
+    </ul>
+    <!-- /.navbar-top-links -->
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+            {% if current_user.is_authenticated %}
+                <li class="sidebar-search">
+                    <div class="input-group custom-search-form">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </li>
+                <li><a href="{{ url_for('user.index') }}"><i class="fa fa-users fa-fw"></i> Users</a></li>
+                <li><a href="{{ url_for('firm.index') }}"><i class="fa fa-cloud fa-fw"></i> Firms</a></li>
+                <li><a href="{{ url_for('formation.index') }}"><i class="fa fa-desktop fa-fw"></i> Cursus</a></li>
+                  </ul>
+        </li>
+            {% endif %}
+            </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+    <!-- /.navbar-static-side -->
+    </nav>
+    <div id="page-wrapper">
+        {% for message in get_flashed_messages() %}
         <div class="alert alert-warning">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            {{msg}}
+            {{ message }}
         </div>
         {% endfor %}
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{url_for('main.index')}}">42Labs</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                {% if current_user.is_authenticated and current_user.role.id < 2 %}
-                <li><a href="{{ url_for('auth.register') }}">Add new menber</a></li>
-                <li><a href="{{ url_for('firm.index') }}">Add new firm</a></li>
-                <li><a href="{{ url_for('formation.index') }}">Cursus</a></li>
-                {% endif %}
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                {% if current_user.is_authenticated %}
-                <li><a href="{{ url_for('main.user', user_id=current_user.id) }}"> {{current_user.username}} </a></li>
-                <li><a href="{{ url_for('auth.logout') }}"> Sign out </a></li>
-                {% else %}
-                <li><a href="{{ url_for('auth.login') }}"> Sign in </a></li>
-                {% endif %}
-            </ul>
-        </div>
+        {% block page_content %}
+        {% endblock %}
     </div>
+    <!-- /#page-wrapper -->
 </div>
+<!-- /#wrapper -->
 {% endblock %}
+{% block scripts %}
+{{super()}}
+    <script src="{{url_for('static', filename='js/jquery-1.11.0.js')}}"></script>
+    <script src="{{url_for('static', filename='js/jquery-ui.js')}}"></script>
+    <script src="{{url_for('static', filename='js/sb-admin-2.js')}}"></script>
+    <script src="{{url_for('static', filename='js/plugins/morris/raphael.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/plugins/morris/morris.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/bootstrap-editable.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/plugins/datepicker/moment.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/plugins/datepicker/bootstrap-datetimepicker.js')}}"></script>
+    <script src="{{url_for('static', filename='js/plugins/metisMenu/metisMenu.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/plugins/dataTables/jquery.dataTables.js')}}"></script>
+    <script src="{{url_for('static', filename='js/plugins/dataTables/dataTables.bootstrap.js')}}"></script>
+    <script src="{{url_for('static', filename='js/global.js')}}"></script>
+    <script type="text/javascript">
+    //turn to inline mode
+    // $(function() {
 
-{% block content %}
-<div class="container">
-    {% block page_content %}{% endblock %}
-</div>
+    // $('#interfaces-list').DataTable({"paging" : false});
+
+    // });
+</script>
 {% endblock %}

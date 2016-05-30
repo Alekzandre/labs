@@ -28,9 +28,11 @@ def create_app(config_name):
     from .auth import auth as auth_blueprint
     from .firm import firm as firm_blueprint
     from .formation import formation as formation_blueprint
+    from .user import user as user_blueprint
     app.register_blueprint(main_blueprint, url_prefix='/main')
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
     app.register_blueprint(firm_blueprint, url_prefix='/firm')
     app.register_blueprint(formation_blueprint, url_prefix='/formation')
+    app.register_blueprint(user_blueprint, url_prefix='/user')
 
     return app

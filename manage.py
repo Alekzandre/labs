@@ -1,6 +1,6 @@
 #! /usr/bin/python
 import os
-from flask import redirect, url_for
+from flask import redirect, url_for, render_template
 from app import create_app, db
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
@@ -14,7 +14,7 @@ migrate = Migrate(app, db)
 
 @app.route('/')
 def base_url():
-    return redirect(url_for('auth.login'))
+    return (render_template('index.html'))
 
 
 def make_shell_context():
