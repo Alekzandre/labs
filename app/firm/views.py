@@ -3,6 +3,7 @@ from flask.ext.login import login_required
 from .forms import FirmForm
 from . import firm
 from .models import Firm
+from ..auth.models import User, Role
 from .. import db
 
 
@@ -11,6 +12,13 @@ from .. import db
 def index():
 	firms = Firm.query.all()
 	return render_template('firm/index.html', firms=firms)
+
+@firm.route('/firm/<int:firm_id>', methods=['GET', 'POST'])
+@login_required
+def firm_profile(firm_id):
+    firm = Firm.query.get(firm_id)
+    users = User.query.filter_by(firm_id=firm.id).all()
+    return render_template('firm/firm.html', firm=firm, users=users)
 
 @firm.route('/add_firm', methods=['GET', 'POST'])
 @login_required

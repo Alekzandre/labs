@@ -86,4 +86,3 @@ class IntraApi:
         req = urllib2.Request(url, values)
         response = urllib2.urlopen(req)
         return response
-

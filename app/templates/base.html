@@ -58,12 +58,22 @@
                         </span>
                     </div>
                 </li>
-                <li><a href="{{ url_for('user.index') }}"><i class="fa fa-users fa-fw"></i> Users</a></li>
-                <li><a href="{{ url_for('firm.index') }}"><i class="fa fa-cloud fa-fw"></i> Firms</a></li>
-                <li><a href="{{ url_for('formation.index') }}"><i class="fa fa-desktop fa-fw"></i> Cursus</a></li>
+                <li class="nav-header" data-toggle="collapse" data-target="#user">
+                  <a href="#"><i class="fa fa-users fa-fw"></i> Users<span class="fa arrow"></span></a>
+                  <ul class="nav nav-list collapse" id="user">
+                    <li><a href="{{ url_for('user.index') }}" title="Title"> Liste des Users</a></li>
+                    <li><a href="{{ url_for('auth.register') }}" title="Title"> Ajouter un User</a></li>
                   </ul>
-        </li>
-            {% endif %}
+                </li>
+                <li class="nav-header" data-toggle="collapse" data-target="#firms">
+                  <a href="#"><i class="fa fa-cloud fa-fw"></i> Firms<span class="fa arrow"></span></a>
+                  <ul class="nav nav-list collapse" id="firms">
+                    <li><a href="{{ url_for('firm.index') }}" title="Title"> Liste des Firms</a></li>
+                    <li><a href="{{ url_for('firm.add_firm') }}" title="Title"> Ajouter une Firme</a></li>
+                  </ul>
+                </li>
+                <li><a href="{{ url_for('formation.index') }}"><i class="fa fa-desktop fa-fw"></i> Cursus</a></li>
+               {% endif %}
             </ul>
         </div>
         <!-- /.sidebar-collapse -->

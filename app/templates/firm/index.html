@@ -30,7 +30,7 @@
 								{% for f in firms %}
 								<tr>
 									<td>{{ f.id }}</td>
-									<td>{{ f.name }}</td>
+									<td><a href="{{ url_for('firm.firm_profile', firm_id=f.id) }}" >{{f.name}}</a></td>
 								</tr>
 								{% endfor %}
 							</tbody>
