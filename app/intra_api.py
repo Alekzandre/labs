@@ -32,7 +32,7 @@ class IntraApi:
         response = urllib2.urlopen(url)
         res = json.load(response)
         for elem in res:
-            if elem['name'] == '42':
+            if elem['slug'] == 'piscine-c-a-distance':
                 self.cursus_id = str(elem['id'])
 
     def get_projects(self):

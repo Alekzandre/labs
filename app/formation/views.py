@@ -15,9 +15,11 @@ def index():
                              Config.INTRA_API_CLIENT_SECRET)
     projects = api.get_projects()
     # todo populate db
+    # project = Project(id_intra=int("1"), name="fuck you", desc="ta mere")
+    # db.session.add(project)
     for p in projects:
         pass
-        # print p[0], p[1], p[2]
-        # project = Project(id_intra=int(p[0]), name=p[1], desc="")
-        # db.session.add(project)
+    #     print p[0], p[1], p[2]
+    #     project = Project(id_intra=int(p[0]), name=p[1], desc="")
+    #     db.session.add(project)
     return(render_template('formation/index.html', projects=projects))
