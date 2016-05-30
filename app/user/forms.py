@@ -4,6 +4,7 @@ from wtforms.validators import Required, EqualTo
 from wtforms import validators
 import re
 
+
 class UpdateUserForm(Form):
     password = PasswordField('New Password', validators=[
         Required(), EqualTo('password2', message='Passwords must match.')])
