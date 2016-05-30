@@ -10,4 +10,69 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-users fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">{{user_c}}</div>
+                        <div>&nbsp;</div>
+                    </div>
+                </div>
+            </div>
+            <a target="_blank">
+                <div class="panel-footer">
+                    <span class="pull-left"><a href="{{ url_for('user.index') }}">Total Users</a></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-institution fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">{{firm_c}}</div>
+                        <div>&nbsp;</div>
+                    </div>
+                </div>
+            </div>
+            <a target="_blank">
+                <div class="panel-footer">
+                    <span class="pull-left"><a href="{{ url_for('firm.index') }}">Total Firms</a></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-desktop fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">{{project_c}}</div>
+                        <div>&nbsp;</div>
+                    </div>
+                </div>
+            </div>
+            <a target="_blank">
+                <div class="panel-footer">
+                    <span class="pull-left"><a href="{{ url_for('formation.index') }}">Total Projects</a></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock %}
