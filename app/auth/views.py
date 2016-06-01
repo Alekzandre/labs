@@ -31,8 +31,6 @@ def logout():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        print form.role.data.id
-        print form.firm.data.id
         user = User(email=form.email.data,
                     username=form.username.data,
                     password=form.password.data,

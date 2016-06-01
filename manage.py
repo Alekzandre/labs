@@ -7,6 +7,7 @@ from flask.ext.migrate import Migrate, MigrateCommand
 from app.auth.models import User, Role
 from app.firm.models import Firm
 from app.formation.models import Project
+from app.contrat.models import Contrat
 
 app = create_app(os.getenv('42LABSCONF') or 'default')
 manager = Manager(app)
@@ -18,7 +19,8 @@ def base_url():
     user_count = User.query.count()
     firm_count = Firm.query.count()
     project_count = Project.query.count()
-    return (render_template('index.html', user_c=user_count, firm_c=firm_count, project_c=project_count))
+    contrat_count = Contrat.query.count()
+    return (render_template('index.html', user_c=user_count, firm_c=firm_count, project_c=project_count, contrat_c=contrat_count))
 
 
 def make_shell_context():
