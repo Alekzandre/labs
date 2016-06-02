@@ -10,8 +10,9 @@ from .. import db
 @firm.route('/', methods=['GET', 'POST'])
 @login_required
 def index():
-	firms = Firm.query.all()
-	return render_template('firm/index.html', firms=firms)
+    firms = Firm.query.all()
+    users = User.query.all()
+    return render_template('firm/index.html', firms=firms, users=users)
 
 @firm.route('/firm/<int:firm_id>', methods=['GET', 'POST'])
 @login_required

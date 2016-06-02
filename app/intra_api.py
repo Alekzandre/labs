@@ -3,6 +3,7 @@ import urllib
 import urllib2
 import json
 
+# http://api.intra-staging.42.fr/
 
 class IntraApi:
 

@@ -24,13 +24,20 @@
 								<tr>
 									<th>id</th>
 									<th>name</th>
+									<th>users</th>
 								</tr>
 							</thead>
 							<tbody>
 								{% for f in firms %}
 								<tr>
 									<td>{{ f.id }}</td>
-									<td><a href="{{ url_for('firm.firm_profile', firm_id=f.id) }}" >{{f.name}}</a></td>
+									<td><a href="{{ url_for('firm.firm_profile', firm_id=f.id) }}" >{{f.name}}</a>
+									<td>{% for u in users %}
+												{% if f.id == u.firm_id %}
+												<a href="{{ url_for('user.user_profile', user_id=u.id) }}" >{{u.username}}</a>
+											{% endif %}
+									{% endfor %} </td>
+									</td>
 								</tr>
 								{% endfor %}
 							</tbody>

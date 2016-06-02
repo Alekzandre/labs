@@ -35,7 +35,8 @@ def register():
                     username=form.username.data,
                     password=form.password.data,
                     role_id=form.role.data.id,
-                    firm_id=form.firm.data.id
+                    firm_id=form.firm.data.id,
+                    mobile=form.mobile.data
                     )
         db.session.add(user)
         flash('You can now login.')

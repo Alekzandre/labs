@@ -34,6 +34,7 @@ class RegistrationForm(Form):
     password2 = PasswordField('Confirm password', validators=[Required()])
     role = QuerySelectField('Role list',query_factory=get_Role,get_label='name',allow_blank=False)
     firm = QuerySelectField('Firm list',query_factory=get_Firm,get_label='name',allow_blank=False)
+    mobile = StringField('Phone Number', validators=[Required(), Length(10), Regexp('^[0-9]*$')])
     submit = SubmitField('Register')
 
     def validate_email(self, field):

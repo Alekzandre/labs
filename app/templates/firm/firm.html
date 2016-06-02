@@ -29,7 +29,7 @@
 							<tbody>
 									<tr>
 									<td><img src='/cdn/jacob.png'/></td>
-									<td>{% for u in users %}<a href="{{ url_for('user.user_profile', user_id=u.id) }}" > {{u.username}}</a>, {%endfor%}</td>
+									<td>{% for u in users %}<a href="{{ url_for('user.user_profile', user_id=u.id) }}" > {{u.username}} </a> {%endfor%}</td>
 								</tr>
 							</tbody>
 						</table>

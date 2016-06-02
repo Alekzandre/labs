@@ -24,6 +24,7 @@
 								<tr>
 									<th>Username</th>
 									<th>Email</th>
+									<th>Phone Number</th>
 									<th>Firm</th>
 									<th>Role</th>
 								</tr>
@@ -33,6 +34,7 @@
 								<tr>
 									<td><a href="{{ url_for('user.user_profile', user_id=u.id) }}" >{{u.username}}</a></td>
 									<td>{{ u.email }}</td>
+									<td>{{ u.mobile }}</td>
 									<td>{{ u.firm.name }}</td>
 									<td>{{ u.role.name }}</td>
 

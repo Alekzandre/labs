@@ -6,3 +6,4 @@ class Project(db.Model):
     id_intra = db.Column(db.Integer, unique=False, index=True)
     name = db.Column(db.String(64), unique=True, index=True)
     desc = db.Column(db.String(512))
+    contrats = db.relationship('Contrat', backref='project')

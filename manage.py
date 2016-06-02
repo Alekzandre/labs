@@ -29,7 +29,9 @@ def make_shell_context():
         'db': db,
         'User': User,
         'Firm': Firm,
-        'Role': Role
+        'Role': Role,
+        'Formation': Project,
+        'Contrat': Contrat
     }
 
 manager.add_command("shell", Shell(make_context=make_shell_context))

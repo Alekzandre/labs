@@ -18,7 +18,7 @@ def index():
 def create_contrat():
     form = ContratForm()
     if form.validate_on_submit():
-        contrat = Contrat(slot=int(form.slot.data), firm_id=form.firm.data.id)
+        contrat = Contrat(slot=int(form.slot.data), firm_id=form.firm.data.id, project_id=str(form.project.data.id))
         db.session.add(contrat)
         return redirect(url_for('contrat.index'))
     return(render_template('contrat/create_contrat.html', form=form))
