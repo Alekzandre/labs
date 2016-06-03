@@ -33,3 +33,10 @@ def update_profile(user_id):
         db.session.commit()
         return redirect(url_for('user.user_profile', user_id=user_id))
     return render_template('user/update.html', form=form)
+
+
+@user.route('/photo/<int:user_id>', methods=['GET'])
+@login_required
+def update_photo(user_id):
+    user = User.query.get_or_404(user_id)
+    return render_template('user/photo.html', user=user, user_id=user_id)
