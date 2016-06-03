@@ -18,14 +18,14 @@ def index():
 @user.route('/user/<int:user_id>', methods=['GET', 'POST'])
 @login_required
 def user_profile(user_id):
-    user = User.query.get(user_id)
+    user = User.query.get_or_404(user_id)
     return render_template('user/user.html', user=user)
 
 
 @user.route('/user/update/<int:user_id>', methods=['GET', 'POST'])
 @login_required
 def update_profile(user_id):
-    user = User.query.get(user_id)
+    user = User.query.get_or_404(user_id)
     form = UpdateUserForm()
     if form.validate_on_submit():
         user.password = form.password.data

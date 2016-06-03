@@ -21,6 +21,7 @@
 						<table class="table table-striped table-bordered table-hover" id="users-list">
 						<thead>
 								<tr>
+									<th>Contrat nb</th>
 									<th>Firm</th>
 									<th>nb de slots</th>
 									<th>project</th>
@@ -29,7 +30,8 @@
 							<tbody>
 								{% for c in contrats %}
 								<tr>
-									<td>{{ c.firm.name }}</td>								
+									<td><a href="{{ url_for('contrat.contrat_profile', contrat_id=c.id) }}" >contrat#{{ c.id }}</a></td>
+									<td>{{ c.firm.name }}</td>
 									<td>{{ c.slot }}</td>
 									<td>{{ c.project.name }}</td>
 								</tr>

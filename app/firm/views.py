@@ -4,6 +4,7 @@ from .forms import FirmForm
 from . import firm
 from .models import Firm
 from ..auth.models import User, Role
+from ..contrat.models import Contrat
 from .. import db
 
 
@@ -17,9 +18,10 @@ def index():
 @firm.route('/firm/<int:firm_id>', methods=['GET', 'POST'])
 @login_required
 def firm_profile(firm_id):
-    firm = Firm.query.get(firm_id)
+    firm = Firm.query.get_or_404(firm_id)
     users = User.query.filter_by(firm_id=firm.id).all()
-    return render_template('firm/firm.html', firm=firm, users=users)
+    contrats = Contrat.query.filter_by(firm_id=firm.id).all()
+    return render_template('firm/firm.html', firm=firm, users=users, contrats=contrats)
 
 @firm.route('/add_firm', methods=['GET', 'POST'])
 @login_required
