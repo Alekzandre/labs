@@ -22,7 +22,11 @@
 						<table class="table table-striped table-bordered table-hover" id="user">
 							<tbody>
 									<tr>
-									<td><img src='/cdn/jacob.png'/></td>
+									<td>
+										<a href='{{url_for('user.update_photo', user_id = user_id)}}'>
+											<img src='{{url_for('static', filename='cdn/' ~ user_id ~ '.jpg')}}' width='128px'/>
+										</a>
+									</td>
 									<td>{{ user.email }}</td>
 									<td><a href="{{ url_for('firm.firm_profile', firm_id=user.firm_id) }}" >{{ user.firm.name }}</a></td>
 									<td>{{ user.role.name }}</td>

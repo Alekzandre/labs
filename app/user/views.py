@@ -19,7 +19,7 @@ def index():
 @login_required
 def user_profile(user_id):
     user = User.query.get_or_404(user_id)
-    return render_template('user/user.html', user=user)
+    return render_template('user/user.html', user=user, user_id=user_id)
 
 
 @user.route('/user/update/<int:user_id>', methods=['GET', 'POST'])
