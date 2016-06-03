@@ -3,6 +3,7 @@
 {% block title %}Labs{% endblock %}
 
 {% block page_content %}
+{% if current_user.is_authenticated %}
 <div class="row">
      <div class="col-lg-12" >
         <div class="page-header">
@@ -95,5 +96,6 @@
             </a>
         </div>
     </div>
+{% endif %}
 </div>
 {% endblock %}

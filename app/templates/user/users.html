@@ -27,6 +27,7 @@
 									<th>Phone Number</th>
 									<th>Firm</th>
 									<th>Role</th>
+									<th>Delete</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -37,7 +38,8 @@
 									<td>{{ u.mobile }}</td>
 									<td>{{ u.firm.name }}</td>
 									<td>{{ u.role.name }}</td>
-
+									<td><a href="{{ url_for('auth.logout') }}"><i class="fa fa-ban"></i></a></td>
+        							{% else %}
 								</tr>
 								{% endfor %}
 							</tbody>
