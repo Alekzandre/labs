@@ -30,6 +30,6 @@ class ContratForm(Form):
 
 
 class UpdateContratForm(Form):
-    users = QuerySelectField(
+    user = QuerySelectField(
         'User list', query_factory=get_User, get_label='username', allow_blank=False)
     submit = SubmitField("add")

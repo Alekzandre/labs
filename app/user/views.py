@@ -15,14 +15,14 @@ def index():
     return render_template('user/users.html', users=users)
 
 
-@user.route('/user/<int:user_id>', methods=['GET', 'POST'])
+@user.route('/<int:user_id>', methods=['GET', 'POST'])
 @login_required
 def user_profile(user_id):
     user = User.query.get_or_404(user_id)
     return render_template('user/user.html', user=user, user_id=user_id)
 
 
-@user.route('/user/update/<int:user_id>', methods=['GET', 'POST'])
+@user.route('/update/<int:user_id>', methods=['GET', 'POST'])
 @login_required
 def update_profile(user_id):
     user = User.query.get_or_404(user_id)
@@ -40,3 +40,12 @@ def update_profile(user_id):
 def update_photo(user_id):
     user = User.query.get_or_404(user_id)
     return render_template('user/photo.html', user=user, user_id=user_id)
+
+
+@user.route('/delete/<int:user_id>', methods=['GET', 'POST'])
+@login_required
+def delete_user(user_id):
+    user = User.query.get_or_404(user_id)
+    db.session.delete(user)
+    db.session.commit()
+    return redirect(url_for('user.index'))

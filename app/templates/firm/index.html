@@ -38,8 +38,9 @@
 											{% endif %}
 									{% endfor %}
 									</td>
-								</tr>
+								<td><a href="{{ url_for('firm.delete_firm', firm_id=f.id) }}"><i class="fa fa-ban"></i></a></td>
 								{% endfor %}
+								</tr>
 							</tbody>
 						</table>
 					</div>

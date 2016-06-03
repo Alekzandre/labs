@@ -15,7 +15,7 @@ def index():
     users = User.query.all()
     return render_template('firm/index.html', firms=firms, users=users)
 
-@firm.route('/firm/<int:firm_id>', methods=['GET', 'POST'])
+@firm.route('/<int:firm_id>', methods=['GET', 'POST'])
 @login_required
 def firm_profile(firm_id):
     firm = Firm.query.get_or_404(firm_id)
@@ -34,3 +34,11 @@ def add_firm():
         flash(flash_firm_add)
         return redirect(url_for('firm.index'))
     return(render_template('firm/add_firm.html', form=form))
+
+@firm.route('/delete/<int:firm_id>', methods=['GET', 'POST'])
+@login_required
+def delete_firm(firm_id):
+    firm = Firm.query.get_or_404(firm_id)
+    db.session.delete(firm)
+    db.session.commit()
+    return redirect(url_for('firm.index'))
