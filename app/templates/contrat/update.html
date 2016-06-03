@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Labs - Update{% endblock %}
+
+{% block page_content %}
+<div class="row">
+     <div class="col-lg-12" >
+		<div class="page-header">
+    <h1>Update contrat#{{contrat.id}}</h1>
+		</div>
+    </div>
+</div>
+<div class="col-md-4">
+    {{ wtf.quick_form(form) }}
+</div>
+{% endblock %}

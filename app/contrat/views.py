@@ -25,8 +25,9 @@ def contrat_profile(contrat_id):
 def update_contrat(contrat_id):
     contrat = Contrat.query.get_or_404(contrat_id)
     form = UpdateContratForm()
+    if form.validate_on_submit():
         return redirect(url_for('contrat.contrat_profile', contrat_id=contrat_id))
-    return render_template('contrat/update.html', form=form)
+    return render_template('contrat/update.html', form=form, contrat=contrat)
 
 
 @contrat.route('/create_contrat', methods=['GET', 'POST'])
@@ -35,7 +36,7 @@ def create_contrat():
     form = ContratForm()
     if form.validate_on_submit():
         contrat = Contrat(slot=int(
-            form.slot.data), firm_id=form.firm.data.id, project_id=str(form.project.data.id))
+        form.slot.data), firm_id=form.firm.data.id, project_id=str(form.project.data.id))
         db.session.add(contrat)
         return redirect(url_for('contrat.index'))
-    return(render_template('contrat/create_contrat.html', form=form))
+    return render_template('contrat/create_contrat.html', form=form)
