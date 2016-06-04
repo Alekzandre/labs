@@ -63,7 +63,7 @@ def create_contrat():
     return render_template('contrat/create_contrat.html', form=form)
 
 
-@contrat.route('/remove/user/<int:user_id>/<int:contrat_id>', methods=['GET', 'POST'])
+@contrat.route('/remove/user/<int:user_id>/contrat/<int:contrat_id>', methods=['GET', 'POST'])
 @login_required
 def remove_user(user_id, contrat_id):
     contrat = Contrat.query.get_or_404(contrat_id)
