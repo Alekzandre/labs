@@ -25,15 +25,17 @@
 									<th>Firm</th>
 									<th>nb de slots</th>
 									<th>project</th>
+									<th>users</th>
 								</tr>
 							</thead>
 							<tbody>
 								{% for c in contrats %}
 								<tr>
 									<td><a href="{{ url_for('contrat.contrat_profile', contrat_id=c.id) }}" >contrat#{{ c.id }}</a></td>
-									<td>{{ c.firm.name }}</td>
-									<td>{{ c.slot }}</td>
+									<td><a href="{{ url_for('firm.firm_profile', firm_id=c.firm.id) }}" >{{ c.firm.name }}</a></td>
+									<td>{{ c.used_slot }}/{{ c.slot }}</td>
 									<td>{{ c.project.name }}</td>
+									<td>{% for u in c.user %}<a href="{{ url_for('user.user_profile', user_id=u.id) }}" >{{u.username}} </a><a href="{{ url_for('contrat.remove_user', user_id=u.id, contrat_id=c.id) }}"><i class="fa fa-ban"></i></a>{% endfor %}</td>
 								</tr>
 								{% endfor %}
 							</tbody>

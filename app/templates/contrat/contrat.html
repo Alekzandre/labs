@@ -22,13 +22,15 @@
 									<th>firm</th>
 									<th>projet</th>
 									<th>slots</th>
+									<th>users</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td>{{contrat.firm.name}}</td>
+									<td><a href="{{ url_for('firm.firm_profile', firm_id=contrat.firm.id) }}" >{{contrat.firm.name}}</td>
 									<td>{{contrat.project.name}}</td>
 									<td>{{contrat.used_slot}}/{{contrat.slot}}</td>
+									<td>{% for u in contrat.user %}<a href="{{ url_for('user.user_profile', user_id=u.id) }}" >{{u.username}} </a>{%endfor%}
 									<td><a href="{{ url_for('contrat.update_contrat', contrat_id=contrat.id) }}" >edit</a></td>
 								</tr>
 							</tbody>
