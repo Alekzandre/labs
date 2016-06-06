@@ -3,7 +3,8 @@ import urllib
 import urllib2
 import json
 
-# http://api.intra-staging.42.fr/
+URL_STAGING = 'https://api.intra.42.fr/'
+URL_PROD = 'http://api.intra-staging.42.fr/'
 
 class IntraApi:
 
@@ -14,7 +15,7 @@ class IntraApi:
         self.cursus_id = ''
 
     def get_token(self):
-        url = "https://api.intra.42.fr/oauth/token"
+        url = URL_STAGING + "oauth/token"
         data = {}
         data['grant_type'] = 'client_credentials'
         data['client_id'] = self.client_id
@@ -22,6 +23,8 @@ class IntraApi:
         values = urllib.urlencode(data)
         # print values
         req = urllib2.Request(url, values)
+        print "-" * 12
+        print req
         response = urllib2.urlopen(req)
         res = json.load(response)
         # print res
@@ -29,7 +32,7 @@ class IntraApi:
 
     def get_cursus(self):
         self.get_token()
-        url = "https://api.intra.42.fr/v2/cursus?access_token=" + self.token + "&page=1"
+        url = URL_STAGING + "v2/cursus?access_token=" + self.token + "&page=1"
         response = urllib2.urlopen(url)
         res = json.load(response)
         for elem in res:
@@ -40,7 +43,7 @@ class IntraApi:
         self.get_cursus()
         projects = []
         for nb in range(4):
-            url = "https://api.intra.42.fr/v2/cursus/" + self.cursus_id + \
+            url = URL_STAGING + "v2/cursus/" + self.cursus_id + \
                 "/projects?access_token=" + self.token + "&page=" + str(nb)
             print url
             response = urllib2.urlopen(url)
@@ -52,7 +55,7 @@ class IntraApi:
 
     def create_User(self, mail, fname, lname, campus_id='1', cursus_id='1'):
         self.get_cursus()
-        url = "https://api.intra.42.fr/v2/users"
+        url = URL_STAGING + "v2/users"
         data = {}
         data['access_token'] = self.token
         data['email'] = mail
@@ -67,7 +70,7 @@ class IntraApi:
 
     def subscribe_User_To_Cursus(self, user_id, cursus_id='1'):
         self.get_cursus()
-        url = "https://api.intra.42.fr/v2/cursus_users"
+        url = URL_STAGING + "v2/cursus_users"
         data = {}
         data['access_token'] = self.token
         data['cursus_id'] = cursus_id
@@ -79,7 +82,7 @@ class IntraApi:
 
     def subscribe_User_To_Project(self, project_id, user_id):
         self.get_cursus()
-        url = "https://api.intra.42.fr/v2/" + project_id + "/projects_users"
+        url = URL_STAGING + "v2/" + project_id + "/projects_users"
         data = {}
         data['access_token'] = self.token
         data['user_id'] = user_id

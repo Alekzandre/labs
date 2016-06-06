@@ -24,3 +24,12 @@ def index():
     #     project = Project(id_intra=int(p[0]), name=p[1], desc="")
     #     db.session.add(project)
     return(render_template('formation/index.html', projects=projects))
+
+# @formation.route('/create_user', methods=['GET', 'POST'])
+# @login_required
+# def create_user():
+#     api = intra_api.IntraApi(Config.INTRA_API_CLIENT_ID,
+#                              Config.INTRA_API_CLIENT_SECRET)
+#     new_user = api.create_User('alex@alex.org', 'alex', 'carayon')
+#     print new_user.response
+#     return redirect(url_for('formation.index'))
