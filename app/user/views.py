@@ -5,7 +5,7 @@ from .. import db
 from .forms import UpdateUserForm
 from ..firm.models import Firm
 from ..auth.models import User, Role
-import os
+import os, base64
 
 
 @user.route('/', methods=['GET', 'POST'])
@@ -40,6 +40,15 @@ def update_profile(user_id):
 def update_photo(user_id):
     user = User.query.get_or_404(user_id)
     return render_template('user/photo.html', user=user, user_id=user_id)
+
+@user.route('/photo/<int:user_id>', methods=['POST'])
+@login_required
+def update_photo_post(user_id):
+    photo = request.form['photo']
+    f = open("app/static/cdn/%d.jpg" % user_id, 'w')
+    f.write(base64.b64decode(photo))
+    f.close()
+    return "ok"
 
 
 @user.route('/delete/<int:user_id>', methods=['GET', 'POST'])

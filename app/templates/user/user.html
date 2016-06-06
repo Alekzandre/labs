@@ -24,7 +24,7 @@
 									<tr>
 									<td>
 										<a href='{{url_for('user.update_photo', user_id = user_id)}}'>
-											<img src='{{url_for('static', filename='cdn/' ~ user_id ~ '.jpg')}}' width='128px'/>
+											<img src='{{url_for('static', filename='cdn/' ~ user_id ~ '.jpg')}}?' width='128px'/>
 										</a>
 									</td>
 									<td>{{ user.email }}</td>

@@ -24,7 +24,8 @@
 				<div class="panel-body">
 					<!-- <img src="{{url_for('static', filename='cdn/' ~ user_id ~ '.jpg')}}" /> -->
 			       	<div>
-                        <button class="basic-result">Result</button>
+			       		<input type="file" id="upload" value="Choose a file" accept="image/*">
+                        <button class="basic-result">Save</button>
                     </div>
                     <div>
                         <div id="demo-basic"></div>
@@ -41,17 +42,66 @@
     <script src="{{url_for('static', filename='js/croppie.js')}}"></script>
 
     <script>
-    var basic = $('#demo-basic').croppie({
-	    viewport: {
-	        width: 200,
-	        height: 200
-	    }
+
+    $(function() {
+		var basic = $('#demo-basic').croppie({
+		    viewport: {
+		        width: 200,
+		        height: 200
+		    },
+		    boundary: {
+		        width: 250,
+		        height: 250
+		    },
+		    exif: true
+		});
+		basic.croppie('bind', {
+	    	url: '{{url_for('static', filename='cdn/' ~ user_id ~ '.jpg')}}'
+		});
+		//on button click
+		basic.croppie('result', 'html');
+
+		$("#upload").on("change", function() {
+            var input = this
+            if(input.files && input.files[0]) {
+                var reader = new FileReader()
+                reader.onload = function(e) {
+                    basic.croppie('bind', {
+                        url: e.target.result
+                    })
+                    $('.upload-demo').addClass('ready')
+                }
+                reader.readAsDataURL(input.files[0])
+            }
+	    });
+		$("button.basic-result").click(function() {
+			basic.croppie('result', {
+				type: 'canvas',
+				size: 'viewport'
+			}).then(function (resp) {
+//				$("#imgres").attr("src", resp);
+				$.ajax({
+					method: "POST",
+					url: "{{ url_for('user.update_photo_post', user_id=user.id) }}",
+					data: { user_id: {{ user_id }}, photo: resp.split(',')[1] }
+				})
+				.done(function( msg ) {
+					window.location.replace("{{ url_for('user.user_profile', user_id=user.id) }}");
+				});
+			});
+		});
 	});
-	basic.croppie('bind', {
-    	url: '{{url_for('static', filename='cdn/' ~ user_id ~ '.jpg')}}'
-	});
-//on button click
-basic.croppie('result', 'html');
+
+	function dataURItoBlob(dataURI) {
+        var split = dataURI.split(','),
+            dataTYPE = split[0].match(/:(.*?);/)[1],
+            binary = atob(split[1]),
+            array = []
+        for(var i = 0; i < binary.length; i++) array.push(binary.charCodeAt(i))
+        return new Blob([new Uint8Array(array)], {
+            type: dataTYPE
+        })
+    }
     </script>
 
 {% endblock %}
